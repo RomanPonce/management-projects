@@ -4,6 +4,7 @@ import { formProject, projectTitle, projectDescription, containerTask } from "./
 
 formProject.addEventListener("submit",startProject)
 
+// Aclaración. pjt = project
 
 function startProject(event) {
   event.preventDefault();
@@ -12,7 +13,6 @@ function startProject(event) {
   createProject(pjt)
   taskSeccion()
 }
-
 function getInputForm(){
   const pjtTitleIn = document.querySelector("#title-project").value
   const pjtDescriptionIn = document.querySelector("#description-project").value
@@ -20,8 +20,8 @@ function getInputForm(){
 }
 function createProject(pjt){
   const elements = createElementsProject()
-  title.textContent = pjt.projectTitle
-  descripcion.textContent = pjt.description
+  elements.title.textContent = pjt.projectTitle
+  elements.descripcion.textContent = pjt.description
   appendElement(elements)
 }
 function createElementsProject() {
@@ -34,18 +34,20 @@ function appendElement(element) {
   projectDescription.appendChild(element.descripcion)
 }
 
+function taskSeccionElements(){
+  const pendiente = document.createElement("div")
 
+  pendiente.classList.add("pendiente") // Esto se tiene que cambiar
+  
+  const haciendo = document.createElement("div")
+  const hecho = document.createElement("div")
+  return [ pendiente, haciendo, hecho ]
+}
 
 function taskSeccion() {
   const elements = taskSeccionElements()
+  addBtn(elements[0]) 
   appendTaskSeccion(...elements)
-}
-
-function taskSeccionElements{
-  const pendiente = document.createElement("div")
-  const haciendo = document.createElement("div")
-  const hecho = document.createElement("div")
-  return [pendiente,haciendo,hecho]
 }
 
 function appendTaskSeccion(a,b,c){
@@ -54,35 +56,65 @@ function appendTaskSeccion(a,b,c){
   containerTask.appendChild(c)
 }
 
-// Boton para añadir tareas
+function formForTask(){
+  const inputTitle = document.createElement("input")
+  const inputDescription = document.createElement("input")
+  const inputCheck = document.createElement("input")
+  const inputEndDate = document.createElement("input")
 
-function btnAdd(){
+  document.querySelector(".pendiente").appendChild(inputTitle)
+  document.querySelector(".pendiente").appendChild(inputDescription)
+  document.querySelector(".pendiente").appendChild(inputCheck)
+  document.querySelector(".pendiente").appendChild(inputEndDate)
+}
+// Crear cada tarjeta task
 
-  const conteiner = document.createElement("div")
-  const btnAdd = document.createElement("button")
-
-  document.querySelector(".pendiente")
-
+function createTask() {
+  const element = taskElements()
+  const task = createObjTask()
+  setTaskContent(element, task)
+  const card = appendTaskCard(element)
+  containerTask.appendChild(card)
+}
+function setTaskContent(element, task){
+  element.title.textContent = task.name
+  element.descripcion.textContent = task.description
+  element.check.textContent = task.check
+  element.fechaLimite.textContent = task.endDate
 }
 
-function createTask(task) {
+function createObjTask(){
+  const taskName = document.querySelector("#task-name")
+  const taskDescription = document.querySelector("#task-description")
+  const check = document.querySelector("#check")
+  const endDate = document.querySelector("#end-date")
+  const task = new Task(taskName, taskDescription, check, endDate)
+  return task
+}
 
-  const taskBox = document.createElement("article")
-  const taskName = document.createElement("h3")
+function appendTaskCard(element){
+  const taskCard = document.createElement("article")
+  taskCard.appendChild(element.taskName)
+  taskCard.appendChild(element.descripcion)
+  taskCard.appendChild(element.check)
+  taskCard.appendChild(element.fechaLimit)
+  return taskCard
+}
+
+function taskElements() {
+  const title = document.createElement("h3")
   const descripcion = document.createElement("p")
   const check = document.createElement("input")
-  const fechaLimit = document.createElement("p")
-
-  taskName.textContent = task.taskName
-  descripcion.textContent = task.description
-  check.textContent = task.check
-  fechaLimit.textContent = task.endDate
-
-  taskBox.appendChild(taskName)
-  taskBox.appendChild(descripcion)
-  taskBox.appendChild(check)
-  taskBox.appendChild(fechaLimit)
-
-  containerTask.appendChild(taskBox)
+  const fechaLimite = document.createElement("p")
+  return { title, descripcion, check, fechaLimite }
 }
 
+// Añadir cada tajeta task
+
+function addBtn(pendiente){
+  const btn = document.createElement("button");
+  btn.classList.add("add-task")
+  btn.textContent = "+";
+  pendiente.appendChild(btn);
+  btn.addEventListener("click",formForTask)
+}
