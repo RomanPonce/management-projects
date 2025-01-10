@@ -1,17 +1,10 @@
-const projectTitle = document.querySelector("#project-title-box")
-const projectDescription = document.querySelector("#project-description-box")
-const progressBar = document.querySelector("#progress-bar")
-const containerTask = document.querySelector("#container-task")
+const titleContainer = document.querySelector("#project_title_box")
+const descriptionContainer = document.querySelector("#project_description_box")
+const taskContainer = document.querySelector("#container_task")
+const progressBar = document.querySelector("#progress_bar")
 
-const formProject = document.querySelector("#form-project")
-const btnProject = document.querySelector("#btn-project")
+const formProject = document.querySelector("#form_project")
+const btnProject = document.querySelector("#form_project-btn")
 
-const formTask =  document.querySelector("#form-task")
-const inputTitle = document.querySelector("#title")
-const inputDescription = document.querySelector("#descripcion")
-const inputFecha = document.querySelector("#fecha-limite")
-const btnTask = document.querySelector("#btn-task")
-
-
-export { projectTitle, projectDescription, progressBar, containerTask, formProject, btnProject, formTask, inputTitle, inputDescription, inputFecha, btnTask }
+export { titleContainer, descriptionContainer, progressBar, taskContainer, formProject, btnProject }
 

@@ -1,8 +1,6 @@
-export default class Project {
-  constructor(projectTitle,description){
-    this.projectTitle = projectTitle
-    this.description = description
-    this.list = []
+export default class ProjectList {
+  constructor() {
+    this.list = []; 
   }
   get() {
     return this.list
@@ -14,6 +12,7 @@ export default class Project {
     const indice = this.list.indexOf(id)
     this.list.splice(indice, 1)
   }
-
 }
+
+
 
