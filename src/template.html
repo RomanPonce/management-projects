@@ -1,28 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SuperManagement</title>
-</head>
-<body>
-  <form id="form_project">
-    <label for="titulo-projecto">
-      Titulo
-      <input id="form_project-title" type="text" name="titulo-projecto">
-    </label>
-    <label for="descripcion-projecto">
-      Descripcion 
-      <input id="form_project-description" type="textarea" name="descripcion-projecto">
-    </label>
-    <button id="form_project-btn"type="submit">enviar</button>
-  </form>
-
-  <div id="container">
-    <div id="project_title_box"></div>
-    <div id="project_description_box"></div>
-    <div id="progress_bar"></div>
-    <div id="container_task"></div>
-  </div>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SuperManagement</title>
+  </head>
+  <body>
+    <div id="container">
+        <header>
+          <h2 id="project_title_box"></h2>
+          <div id="progress_bar"></div>
+        </header>
+        <aside>
+          <h3>Proyectos</h3>
+          <form id="form_project">
+            <label for="titulo-projecto">
+              Titulo
+              <input id="form_project-title" type="text" name="titulo-projecto" />
+            </label>
+            <label for="descripcion-projecto">
+              Descripcion
+              <input
+                id="form_project-description"
+                type="textarea"
+                name="descripcion-projecto"
+              />
+            </label>
+            <button id="form_project-btn" type="submit">enviar</button>
+          </form>
+          <nav>
+            <ul id="project_container"></ul>
+          </nav>
+        </aside>
+        <div id="container_task">
+          
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

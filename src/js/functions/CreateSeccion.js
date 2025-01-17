@@ -8,10 +8,21 @@ export default function createSeccion() {
 }
 
 function taskSeccionElements(){
+  const addedTask = document.createElement("div")
   const pendiente = document.createElement("div")
-  pendiente.classList.add("pendiente")
   const haciendo = document.createElement("div")
   const hecho = document.createElement("div")
+
+  addedTask.id = "added-task"
+  pendiente.appendChild(addedTask)
+
+
+  pendiente.classList.add("pendiente")
+  pendiente.classList.add("item")
+
+  haciendo.classList.add("haciendo")
+  hecho.classList.add("hecho")
+
   return [ pendiente, haciendo, hecho ]
 }
 

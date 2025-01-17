@@ -1,25 +1,103 @@
-import { formProject } from "./dom/selectors.js";
-import ProjectList from "./class/ProjectList.js";
-import Project from "./class/project.js";
-import createSeccion from "./functions/CreateSeccion.js";
-import handleTask from "./functions/HandleTask.js";
-import getForm from "./functions/manejador.js"
+import { formProject, projectContainer, titleContainer} from "./dom/selectors.js"
+import ProjectList from "./class/ProjectList.js"
+import Project from "./class/project.js"
+import Task from "./class/task.js"
+import createSeccion from "./functions/CreateSeccion.js"
+import "./css/btnShowOrHide.css";
+import "./css/style.css";
+
 
 document.addEventListener("DOMContentLoaded", () => {
-
+  
   let projectList = new ProjectList();
 
   createSeccion();
 
   formProject.addEventListener("submit", (e) => {
     e.preventDefault();
-
-    const { name, description } = getForm();
-
-    const project = new Project(name, description);
-    
-    projectList.add(project)
-
-    handleTask(name);
+    projectList.add(createProject())
+    insertProject(createProject(),projectList)
+    titleContainer.textContent = createProject().title
+    document.querySelector("#added-task").innerHTML = ""
   });
+  
+  document.querySelector("#show-form-task").addEventListener("click", () => {
+    console.log("HOLA")
+    const taskForm = document.querySelector("#task-form")
+    taskForm.classList.toggle("show")
+    taskForm.classList.toggle("hide")
+  });
+
+  document.querySelector("#create-task").addEventListener("click", ()=>{
+    const title = titleContainer.textContent
+    const currentProject = projectList.find(title)
+    currentProject.add(createTask())
+    insertTask(createTask(),projectList)
+  });
+  
+
 });
+
+
+function getFormTask() {
+  const title = document.querySelector("#task-title").value
+  const description = document.querySelector("#task-description").value
+  const endDate = document.querySelector("#task-end-date").value
+  return [ title, description, endDate ]
+}
+function createTask(){
+  const [title, description, endDate] = getFormTask()
+  const task = new Task(title,description,endDate)
+  return task
+}
+function getFormProject(){
+  const name = document.querySelector("#form_project-title").value
+  const description = document.querySelector("#form_project-description").value
+  return [ name, description ]
+}
+function createProject() {
+  const [ name, description ] = getFormProject();
+  const project = new Project(name, description);
+  return project
+}
+
+// Esta funciones ya esta haciendo demasiadas cosas
+
+function insertTask(task,projectList) {
+  const box = document.createElement("div")
+  box.classList.add("task")
+  const title =  document.createElement("p")
+  const btnDelete = document.createElement("button")
+  btnDelete.textContent = "delete"
+  title.textContent = task.title
+  box.appendChild(title)
+  box.appendChild(btnDelete)
+
+  btnDelete.addEventListener("click",()=>{
+    box.remove()
+    projectList.find(titleContainer.textContent).remove(title.textContent)
+  })
+
+   document.querySelector("#added-task").appendChild(box)
+}
+
+function insertProject(project, projectList) {
+  const btn = document.createElement("button")
+  btn.classList.add("project")
+  const li = document.createElement("li")
+  btn.textContent = project.title
+  li.appendChild(btn)
+  projectContainer.appendChild(li)
+  btn.addEventListener("click",()=>{
+    document.querySelector("#added-task").innerHTML = ""
+    titleContainer.textContent = project.title
+    const tasks = projectList.find(titleContainer.textContent).get();
+    for (const task of tasks) {
+      console.log(task)
+      insertTask(task,projectList)
+    }
+  })
+}
+
+
+

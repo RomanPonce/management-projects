@@ -1,0 +1,51 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color:white;
+}
+:root {
+  --bg-color: #1e1e1e;
+}
+
+#container {
+  height: 100vh;
+  width: 100vw;
+  background-color: #252526;
+  display: grid;
+  grid-template: 100px 1fr / 200px repeat(3,1fr);
+  gap: 20px;
+  grid-template-areas: 
+          "aside header header header"
+          "aside task task task"
+}
+#container_task{
+  grid-area: task;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-grow: 1;
+}
+header,aside,.pendiente,.haciendo,.hecho{
+  background-color: var(--bg-color);
+}
+header{
+  grid-area: header;
+}
+aside{
+  grid-area: aside;
+}
+
+#container_task{
+  grid-area: task;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-grow: 1;
+  gap: 20px;
+}
+
+.pendiente,.haciendo,.hecho{
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;
+}
+

@@ -8,9 +8,12 @@ export default class ProjectList {
   add(e) {
     this.list.push(e)
   }
-  remove(id){
-    const indice = this.list.indexOf(id)
-    this.list.splice(indice, 1)
+  find(title){
+    return this.list.find((project)=>project.title === title)
+  }
+  remove(title){
+    const index = this.list.findIndex((project)=>project.title === title)
+    this.list.splice(index,1)
   }
 }
 
