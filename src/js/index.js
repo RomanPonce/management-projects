@@ -18,12 +18,13 @@ document.addEventListener("DOMContentLoaded", () => {
     projectList.add(createProject())
     insertProject(createProject(),projectList)
     titleContainer.textContent = createProject().title
-    document.querySelector("#added-task").innerHTML = ""
+    empityContentNecesary()
   });
   
   document.querySelector("#show-form-task").addEventListener("click", () => {
-    console.log("HOLA")
     const taskForm = document.querySelector("#task-form")
+    const btnShow = document.querySelector("#show-form-task") 
+    btnShow.textContent === "-" ?  btnShow.textContent = "+" : btnShow.textContent = "-"
     taskForm.classList.toggle("show")
     taskForm.classList.toggle("hide")
   });
@@ -34,10 +35,14 @@ document.addEventListener("DOMContentLoaded", () => {
     currentProject.add(createTask())
     insertTask(createTask(),projectList)
   });
-  
 
 });
 
+function empityContentNecesary(){
+  document.querySelector("#added-task").innerHTML = ""
+  document.querySelector("#form_project-title").value = ""
+  document.querySelector("#form_project-description").value = ""
+}
 
 function getFormTask() {
   const title = document.querySelector("#task-title").value
@@ -61,7 +66,7 @@ function createProject() {
   return project
 }
 
-// Esta funciones ya esta haciendo demasiadas cosas
+// Esta fgit cheactory-functions ya esta haciendo demasiadas cosas
 
 function insertTask(task,projectList) {
   const box = document.createElement("div")
@@ -83,10 +88,18 @@ function insertTask(task,projectList) {
 
 function insertProject(project, projectList) {
   const btn = document.createElement("button")
-  btn.classList.add("project")
+  const btnDelete = document.createElement("img")
+  const btnEdit = document.createElement("img")
   const li = document.createElement("li")
+
+  btn.classList.add("project")
+  btnEdit.textContent = "Editar"
+  btnDelete.textContent =  "delete"
   btn.textContent = project.title
   li.appendChild(btn)
+  li.appendChild(btnEdit)
+  li.appendChild(btnDelete)
+
   projectContainer.appendChild(li)
   btn.addEventListener("click",()=>{
     document.querySelector("#added-task").innerHTML = ""

@@ -2,10 +2,10 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  color:white;
+  color:black;
 }
 :root {
-  --bg-color: #1e1e1e;
+  --bg-color: #171717;
 }
 
 #container {
@@ -14,7 +14,6 @@
   background-color: #252526;
   display: grid;
   grid-template: 100px 1fr / 200px repeat(3,1fr);
-  gap: 20px;
   grid-template-areas: 
           "aside header header header"
           "aside task task task"
@@ -25,10 +24,11 @@
   flex-wrap: nowrap;
   flex-grow: 1;
 }
-header,aside,.pendiente,.haciendo,.hecho{
+aside{
   background-color: var(--bg-color);
 }
 header{
+  background-color: #212121;
   grid-area: header;
 }
 aside{
@@ -41,11 +41,34 @@ aside{
   flex-wrap: nowrap;
   flex-grow: 1;
   gap: 20px;
+  padding: 0 20px ;
 }
 
-.pendiente,.haciendo,.hecho{
+.todo,.pendiente,.hecho{
+  background-color: #2f2f2f;
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: 0;
 }
 
+/* Botontes */
+
+ul{
+  & :hover{
+    background-color: #2f2f2f;
+  }
+  & li {
+    display: flex;
+    padding: 5px 0;
+    & button {
+    width: 100%;
+    color: white;
+    background-color: transparent;
+    border: none;
+    }
+    & :hover {
+    cursor: pointer;
+    }
+  } 
+
+}

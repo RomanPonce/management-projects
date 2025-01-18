@@ -8,22 +8,29 @@ export default function createSeccion() {
 }
 
 function taskSeccionElements(){
-  const addedTask = document.createElement("div")
+  const tituloToDo = document.createElement("h3")
+  const addedToDo = document.createElement("div")
+  const todo = document.createElement("div")
+  const tituloPendiente = document.createElement("h3")
   const pendiente = document.createElement("div")
-  const haciendo = document.createElement("div")
+  const tituloHecho = document.createElement("h3")
   const hecho = document.createElement("div")
+  
+  addedToDo.id = "added-task"
+  tituloToDo.textContent = "Tareas"
+  tituloPendiente.textContent = "pendiente"
+  tituloHecho.textContent = "Hecho"
+  
+  todo.appendChild(tituloToDo)
+  todo.appendChild(addedToDo)
+  pendiente.appendChild(tituloPendiente)
+  hecho.appendChild(tituloHecho)
 
-  addedTask.id = "added-task"
-  pendiente.appendChild(addedTask)
-
-
+  todo.classList.add("todo")
   pendiente.classList.add("pendiente")
-  pendiente.classList.add("item")
-
-  haciendo.classList.add("haciendo")
   hecho.classList.add("hecho")
 
-  return [ pendiente, haciendo, hecho ]
+  return [ todo, pendiente, hecho ]
 }
 
 function appendTaskSeccion(pendiente, haciendo, hecho){
