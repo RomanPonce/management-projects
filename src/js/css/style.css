@@ -72,3 +72,15 @@ ul{
   } 
 
 }
+
+/* Icons */
+svg{
+  width: 20px;
+  height: 20px;
+}
+.delete:hover{
+  fill: red;
+}
+.edit:hover{
+  fill: green;
+}

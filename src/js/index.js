@@ -1,8 +1,11 @@
-import { formProject, projectContainer, titleContainer} from "./dom/selectors.js"
+import { formProject, titleContainer} from "./dom/selectors.js"
 import ProjectList from "./class/ProjectList.js"
 import Project from "./class/project.js"
 import Task from "./class/task.js"
 import createSeccion from "./functions/CreateSeccion.js"
+import { insertProject,insertTask } from "./functions/insert.js"
+
+
 import "./css/btnShowOrHide.css";
 import "./css/style.css";
 
@@ -66,51 +69,72 @@ function createProject() {
   return project
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Esta fgit cheactory-functions ya esta haciendo demasiadas cosas
 
-function insertTask(task,projectList) {
-  const box = document.createElement("div")
-  box.classList.add("task")
-  const title =  document.createElement("p")
-  const btnDelete = document.createElement("button")
-  btnDelete.textContent = "delete"
-  title.textContent = task.title
-  box.appendChild(title)
-  box.appendChild(btnDelete)
+// function insertTask(task,projectList) {
+//   const box = document.createElement("div")
+//   box.classList.add("task")
+//   const title =  document.createElement("p")
+//   const btnDelete = document.createElement("button")
+//   btnDelete.textContent = "delete"
+//   title.textContent = task.title
+//   box.appendChild(title)
+//   box.appendChild(btnDelete)
 
-  btnDelete.addEventListener("click",()=>{
-    box.remove()
-    projectList.find(titleContainer.textContent).remove(title.textContent)
-  })
+//   btnDelete.addEventListener("click",()=>{
+//     box.remove()
+//     projectList.find(titleContainer.textContent).remove(title.textContent)
+//   })
 
-   document.querySelector("#added-task").appendChild(box)
-}
+//    document.querySelector("#added-task").appendChild(box)
+// }
 
-function insertProject(project, projectList) {
-  const btn = document.createElement("button")
-  const btnDelete = document.createElement("img")
-  const btnEdit = document.createElement("img")
-  const li = document.createElement("li")
+// function insertProject(project, projectList) {
+//   const btn = document.createElement("button")
+//   const btnDelete = document.createElement("img")
+//   const btnEdit = document.createElement("img")
+//   const li = document.createElement("li")
 
-  btn.classList.add("project")
-  btnEdit.textContent = "Editar"
-  btnDelete.textContent =  "delete"
-  btn.textContent = project.title
-  li.appendChild(btn)
-  li.appendChild(btnEdit)
-  li.appendChild(btnDelete)
+//   btn.classList.add("project")
+//   btnEdit.textContent = "Editar"
+//   btnDelete.textContent =  "delete"
+//   btn.textContent = project.title
+//   li.appendChild(btn)
+//   li.appendChild(btnEdit)
+//   li.appendChild(btnDelete)
 
-  projectContainer.appendChild(li)
-  btn.addEventListener("click",()=>{
-    document.querySelector("#added-task").innerHTML = ""
-    titleContainer.textContent = project.title
-    const tasks = projectList.find(titleContainer.textContent).get();
-    for (const task of tasks) {
-      console.log(task)
-      insertTask(task,projectList)
-    }
-  })
-}
+//   projectContainer.appendChild(li)
+//   btn.addEventListener("click",()=>{
+//     document.querySelector("#added-task").innerHTML = ""
+//     titleContainer.textContent = project.title
+//     const tasks = projectList.find(titleContainer.textContent).get();
+//     for (const task of tasks) {
+//       console.log(task)
+//       insertTask(task,projectList)
+//     }
+//   })
+// }
 
 
 
