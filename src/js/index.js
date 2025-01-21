@@ -1,14 +1,13 @@
-import { formProject, titleContainer} from "./dom/selectors.js"
+import { formProject, titleContainer } from "./dom/selectors.js"
+import { insertProject, insertTask } from "./functions/insert.js"
+
 import ProjectList from "./class/ProjectList.js"
 import Project from "./class/project.js"
 import Task from "./class/task.js"
 import createSeccion from "./functions/CreateSeccion.js"
-import { insertProject,insertTask } from "./functions/insert.js"
-
 
 import "./css/btnShowOrHide.css";
 import "./css/style.css";
-
 
 document.addEventListener("DOMContentLoaded", () => {
   
@@ -18,9 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   formProject.addEventListener("submit", (e) => {
     e.preventDefault();
-    projectList.add(createProject())
-    insertProject(createProject(),projectList)
-    titleContainer.textContent = createProject().title
+    const project = createProject()
+    projectList.add(project)
+    insertProject(project,projectList)
+    titleContainer.textContent = project.title
     empityContentNecesary()
   });
   
@@ -35,8 +35,13 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelector("#create-task").addEventListener("click", ()=>{
     const title = titleContainer.textContent
     const currentProject = projectList.find(title)
-    currentProject.add(createTask())
-    insertTask(createTask(),projectList)
+    // Si currentProject no es undefined, entonces crea la terae y la inserta
+    if(currentProject){
+      currentProject.add(createTask())
+      insertTask(createTask(),projectList)
+    } else{
+      alert("No se pueden crear tareas si no exite ningun proyecto")
+    }
   });
 
 });
@@ -49,92 +54,20 @@ function empityContentNecesary(){
 
 function getFormTask() {
   const title = document.querySelector("#task-title").value
-  const description = document.querySelector("#task-description").value
   const endDate = document.querySelector("#task-end-date").value
-  return [ title, description, endDate ]
+  return [ title, endDate ]
 }
 function createTask(){
-  const [title, description, endDate] = getFormTask()
-  const task = new Task(title,description,endDate)
-  return task
+  const [title, endDate] = getFormTask()
+  const objTask = new Task(title, endDate)
+  return objTask
 }
 function getFormProject(){
   const name = document.querySelector("#form_project-title").value
-  const description = document.querySelector("#form_project-description").value
-  return [ name, description ]
+  return [ name ]
 }
 function createProject() {
   const [ name, description ] = getFormProject();
   const project = new Project(name, description);
   return project
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Esta fgit cheactory-functions ya esta haciendo demasiadas cosas
-
-// function insertTask(task,projectList) {
-//   const box = document.createElement("div")
-//   box.classList.add("task")
-//   const title =  document.createElement("p")
-//   const btnDelete = document.createElement("button")
-//   btnDelete.textContent = "delete"
-//   title.textContent = task.title
-//   box.appendChild(title)
-//   box.appendChild(btnDelete)
-
-//   btnDelete.addEventListener("click",()=>{
-//     box.remove()
-//     projectList.find(titleContainer.textContent).remove(title.textContent)
-//   })
-
-//    document.querySelector("#added-task").appendChild(box)
-// }
-
-// function insertProject(project, projectList) {
-//   const btn = document.createElement("button")
-//   const btnDelete = document.createElement("img")
-//   const btnEdit = document.createElement("img")
-//   const li = document.createElement("li")
-
-//   btn.classList.add("project")
-//   btnEdit.textContent = "Editar"
-//   btnDelete.textContent =  "delete"
-//   btn.textContent = project.title
-//   li.appendChild(btn)
-//   li.appendChild(btnEdit)
-//   li.appendChild(btnDelete)
-
-//   projectContainer.appendChild(li)
-//   btn.addEventListener("click",()=>{
-//     document.querySelector("#added-task").innerHTML = ""
-//     titleContainer.textContent = project.title
-//     const tasks = projectList.find(titleContainer.textContent).get();
-//     for (const task of tasks) {
-//       console.log(task)
-//       insertTask(task,projectList)
-//     }
-//   })
-// }
-
-
-
